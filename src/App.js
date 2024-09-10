@@ -27,10 +27,16 @@ function App() {
 
     }
 
+    const timerEvent = setInterval(() =>{
+        setY(y += 20)
+      }, 1000)
+    
+
   console.log("App loaded")
 
   // state hook so it will be re-render everytime setString is called
-  let [string, setString] = useState("hi there!")
+  let [string, setString] = useState("hi!")
+  let [timer, setTimer] = useState(1000);
   let [x, setX] = useState(0);
   let [y, setY] = useState(0);
 
@@ -47,7 +53,7 @@ function App() {
     // remove listener in the end to prevent extra listener on each re-render
     return () =>{
       document.removeEventListener("keydown", handleEvent)
-      
+      clearInterval(timerEvent)
     }
   })
 
@@ -56,7 +62,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <svg id="inputBox" width="120" height="120" xmlns="http://www.w3.org/2000/svg"><rect fill="gray" x={x} y={y} width="100" height="100" /></svg>
+        <SquareSVG x={x} y={y} w="500" h="500"></SquareSVG>
         <h4 className='inputComponenet'>{string}</h4>
       </header>
     </div>
